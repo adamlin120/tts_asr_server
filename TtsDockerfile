@@ -1,0 +1,10 @@
+FROM adamlin120/tts:0.6.2
+
+ENV PYTHONIOENCODING=utf-8
+ENV LC_ALL=C.UTF-8
+ENV LANG=C.UTF-8
+
+ENV TTS_PORT=5002
+EXPOSE $TTS_PORT
+
+CMD ["bash", "-c", "tts-server", "--model_name", "tts_models/en/ljspeech/fast_pitch", "--vocoder_name", "vocoder_models/en/ljspeech/hifigan_v2", "--port", "5002", "--use_cuda", "True", "--show_details", "True"]

@@ -1,0 +1,15 @@
+FROM huggingface/transformers-pytorch-gpu:4.18.0
+
+ENV PYTHONIOENCODING=utf-8
+ENV LC_ALL=C.UTF-8
+ENV LANG=C.UTF-8
+
+RUN pip install --no-cache-dir --upgrade pip
+RUN apt-get install libasound-dev portaudio19-dev libportaudio2 libportaudiocpp0 -y
+RUN apt install ffmpeg -y
+
+RUN pip install --no-cache-dir "g2p-en==2.1.0" "fastapi[all]==0.75.2" "TTS==0.6.2"
+
+COPY main.py ./
+
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "80"]
